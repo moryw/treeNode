@@ -8,20 +8,31 @@ class TreeNode {
     if (child instanceof TreeNode) {
       this.children.push(child)
     } else {
-      let newChild = new TreeNode(child)
-      this.children.push(newChild)
+      child = new TreeNode(child)
+      this.children.push(child)
     }
   }
+
+  removeChild(childToRemove) {
+    this.children = this.children.filter(child => {
+      if (childToRemove instanceof TreeNode) {
+        if (childToRemove !== child) {
+          return true
+        } else {
+          return false
+        }
+      }
+      if ( !(childToRemove instanceof TreeNode) ) {
+        if (childToRemove !== child.data) {
+          return true
+        } else {
+          return false
+        }
+      }
+    })
+  }
 }
-
-const tree = new TreeNode(1)
-console.log(tree)
-
-tree.addChild(15)
-console.log(tree)
-
-const newTree = new TreeNode(30)
-tree.addChild(newTree)
-console.log(tree)
+const newTree = new TreeNode(1)
+console.log(newTree.children)
 
 module.exports = TreeNode
